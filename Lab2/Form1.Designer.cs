@@ -467,6 +467,7 @@
             this.Controls.Add(this.SwordPicBox);
             this.Controls.Add(this.BowPicBox);
             this.Controls.Add(this.MacePicBox);
+            this.DoubleBuffered = true;
             this.Name = "TheQuestForm";
             this.Text = "The Quest";
             this.Load += new System.EventHandler(this.TheQuestForm_Load);
