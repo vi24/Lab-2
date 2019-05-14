@@ -4,21 +4,24 @@ using Lab2.GameControls;
 
 namespace Lab2.Movers
 {
-    abstract class Mover
+    public abstract class Mover
     {
         private const int MOVE_INTERVAL = 10;
-        protected Point location;
-        public Point Location { get { return location; } }
-        protected Game game;
+        protected Point _location;
+        protected Game _game;
+
+        public Point Location { get { return _location; } }
+
         public Mover(Game game, Point location)
         {
-            this.game = game;
-            this.location = location;
+            this._game = game;
+            this._location = location;
         }
+
         public bool Nearby(Point locationToCheck, int distance)
         {
-            if (Math.Abs(location.X - locationToCheck.X) < distance &&
-            (Math.Abs(location.Y - locationToCheck.Y) < distance))
+            if (Math.Abs(_location.X - locationToCheck.X) < distance &&
+            (Math.Abs(_location.Y - locationToCheck.Y) < distance))
             {
                 return true;
             }
@@ -27,9 +30,10 @@ namespace Lab2.Movers
                 return false;
             }
         }
+
         public Point Move(Direction direction, Rectangle boundaries)
         {
-            Point newLocation = location;
+            Point newLocation = _location;
             switch (direction)
             {
                 case Direction.Up:

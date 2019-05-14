@@ -5,24 +5,24 @@ using Lab2.Movers.Enemies;
 
 namespace Lab2.Movers.Weapons
 {
-    abstract class Weapon : Mover
+    public abstract class Weapon : Mover
     {
         private const int MOVE_INTERVAL = 10;
         public bool PickedUp { get; private set; }
+        public abstract string Name { get; }
         public Weapon(Game game, Point location) : base(game, location)
         {
             PickedUp = false;
         }
-        public void PickUpWeapon() { PickedUp = true; }
-        public abstract string Name { get; }
         public abstract void Attack(Direction direction, Random random);
-        protected bool DamageEnemy(Direction direction, int radius,
-        int damage, Random random)
+        public void PickUpWeapon() { PickedUp = true; }
+        
+        protected bool DamageEnemy(Direction direction, int radius, int damage, Random random)
         {
-            Point target = game.PlayerLocation;
+            Point target = _game.PlayerLocation;
             for (int distance = 0; distance < radius; distance++)
             {
-                foreach (Enemy enemy in game.Enemies)
+                foreach (Enemy enemy in _game.Enemies)
                 {
                     if (Nearby(enemy.Location, target, distance))
                     {
@@ -30,7 +30,7 @@ namespace Lab2.Movers.Weapons
                         return true;
                     }
                 }
-                target = Move(direction, target, game.Boundaries);
+                target = Move(direction, target, _game.Boundaries);
             }
             return false;
         }
@@ -77,7 +77,6 @@ namespace Lab2.Movers.Weapons
         public Direction CounterClockWiseDirection(Direction direction)
         {
             Direction counterClockWiseDirection;
-
             switch (direction)
             {
                 case Direction.Up:
@@ -102,7 +101,6 @@ namespace Lab2.Movers.Weapons
         public Direction ClockWiseDirection(Direction direction)
         {
             Direction clockWiseDirection;
-
             switch (direction)
             {
                 case Direction.Up:

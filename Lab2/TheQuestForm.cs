@@ -13,8 +13,8 @@ namespace Lab2
         {
             Weapon, Potion
         }
-        private Game game;
-        private Random random = new Random();
+        private Game _game;
+        private Random _random = new Random();
         public TheQuestForm()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace Lab2
 
             UpdatePlayer();
 
-            foreach (Enemy enemy in game.Enemies)
+            foreach (Enemy enemy in _game.Enemies)
             {
                 if (enemy is Bat)
                 {
@@ -84,16 +84,16 @@ namespace Lab2
         #region private methods
         private void TheQuestForm_Load(object sender, EventArgs e)
         {
-            game = new Game(new Rectangle(100, 57, 780, 300));
-            game.NewLevel(random);
+            _game = new Game(new Rectangle(100, 57, 780, 300));
+            _game.NewLevel(_random);
             UpdateCharacters();
         }
 
         private void SwordInventoryPicBox_Click(object sender, EventArgs e)
         {
-            if (game.CheckPlayerInventory("Sword"))
+            if (_game.CheckPlayerInventory("Sword"))
             {
-                game.Equip("Sword");
+                _game.Equip("Sword");
                 UpdateAttackButtons(InventoryType.Weapon);
                 RemovePicBoxBorders();
                 SwordInventoryPicBox.BorderStyle = BorderStyle.FixedSingle;
@@ -102,9 +102,9 @@ namespace Lab2
 
         private void BowInventoryPicBox_Click(object sender, EventArgs e)
         {
-            if (game.CheckPlayerInventory("Bow"))
+            if (_game.CheckPlayerInventory("Bow"))
             {
-                game.Equip("Bow");
+                _game.Equip("Bow");
                 UpdateAttackButtons(InventoryType.Weapon);
                 RemovePicBoxBorders();
                 BowInventoryPicBox.BorderStyle = BorderStyle.FixedSingle;
@@ -113,9 +113,9 @@ namespace Lab2
 
         private void MaceInventoryPicBox_Click(object sender, EventArgs e)
         {
-            if (game.CheckPlayerInventory("Mace"))
+            if (_game.CheckPlayerInventory("Mace"))
             {
-                game.Equip("Mace");
+                _game.Equip("Mace");
                 UpdateAttackButtons(InventoryType.Weapon);
                 RemovePicBoxBorders();
                 MaceInventoryPicBox.BorderStyle = BorderStyle.FixedSingle;
@@ -124,7 +124,7 @@ namespace Lab2
 
         private void PotionBlueInventoryPicBox_Click(object sender, EventArgs e)
         {
-            game.Equip("Blue Potion");
+            _game.Equip("Blue Potion");
             UpdateAttackButtons(InventoryType.Potion);
             RemovePicBoxBorders();
             PotionBlueInventoryPicBox.BorderStyle = BorderStyle.FixedSingle;
@@ -133,7 +133,7 @@ namespace Lab2
 
         private void PotionRedInventoryPicBox_Click(object sender, EventArgs e)
         {
-            game.Equip("Red Potion");
+            _game.Equip("Red Potion");
             UpdateAttackButtons(InventoryType.Potion);
             RemovePicBoxBorders();
             PotionRedInventoryPicBox.BorderStyle = BorderStyle.FixedSingle;
@@ -141,49 +141,49 @@ namespace Lab2
         }
         private void UpMoveButton_Click(object sender, EventArgs e)
         {
-            game.Move(Direction.Up, random);
+            _game.Move(Direction.Up, _random);
             UpdateCharacters();
         }
 
         private void DownMoveButton_Click(object sender, EventArgs e)
         {
-            game.Move(Direction.Down, random);
+            _game.Move(Direction.Down, _random);
             UpdateCharacters();
         }
 
         private void LeftMoveButton_Click(object sender, EventArgs e)
         {
-            game.Move(Direction.Left, random);
+            _game.Move(Direction.Left, _random);
             UpdateCharacters();
         }
 
         private void RightMoveButton_Click(object sender, EventArgs e)
         {
-            game.Move(Direction.Right, random);
+            _game.Move(Direction.Right, _random);
             UpdateCharacters();
         }
 
         private void UpAttackButton_Click(object sender, EventArgs e)
         {
-            game.Attack(Direction.Up, random);
+            _game.Attack(Direction.Up, _random);
             UpdateCharacters();
         }
 
         private void DownAttackButton_Click(object sender, EventArgs e)
         {
-            game.Attack(Direction.Down, random);
+            _game.Attack(Direction.Down, _random);
             UpdateCharacters();
         }
 
         private void LeftAttackButton_Click(object sender, EventArgs e)
         {
-            game.Attack(Direction.Left, random);
+            _game.Attack(Direction.Left, _random);
             UpdateCharacters();
         }
 
         private void RightAttackButton_Click(object sender, EventArgs e)
         {
-            game.Attack(Direction.Right, random);
+            _game.Attack(Direction.Right, _random);
             UpdateCharacters();
         }
 
@@ -195,7 +195,6 @@ namespace Lab2
             PotionRedInventoryPicBox.BorderStyle = BorderStyle.None;
             PotionBlueInventoryPicBox.BorderStyle = BorderStyle.None;
         }
-        #endregion
 
         private void UpdateAttackButtons(InventoryType inventory)
         {
@@ -218,17 +217,17 @@ namespace Lab2
 
         private void SetVisibilityInventoryIcons()
         {
-            SwordInventoryPicBox.Visible = game.CheckPlayerInventory("Sword");
-            BowInventoryPicBox.Visible = game.CheckPlayerInventory("Bow");
-            MaceInventoryPicBox.Visible = game.CheckPlayerInventory("Mace");
-            PotionBlueInventoryPicBox.Visible = game.CheckPlayerInventory("Blue Potion");
-            PotionRedInventoryPicBox.Visible = game.CheckPlayerInventory("Red Potion");
+            SwordInventoryPicBox.Visible = _game.CheckPlayerInventory("Sword");
+            BowInventoryPicBox.Visible = _game.CheckPlayerInventory("Bow");
+            MaceInventoryPicBox.Visible = _game.CheckPlayerInventory("Mace");
+            PotionBlueInventoryPicBox.Visible = _game.CheckPlayerInventory("Blue Potion");
+            PotionRedInventoryPicBox.Visible = _game.CheckPlayerInventory("Red Potion");
         }
 
         private Control SetControlVisiblityPicBoxes()
         {
             Control weaponControl = null;
-            switch (game.WeaponInRoom.Name)
+            switch (_game.WeaponInRoom.Name)
             {
                 case "Sword":
                     weaponControl = SwordPicBox;
@@ -294,7 +293,7 @@ namespace Lab2
 
         private void ShowGamoOverMessageBox(int enemiesShown)
         {
-            if (game.PlayerHitPoints <= 0)
+            if (_game.PlayerHitPoints <= 0)
             {
                 MessageBox.Show("You died");
                 Application.Exit();
@@ -302,15 +301,15 @@ namespace Lab2
             if (enemiesShown < 1)
             {
                 MessageBox.Show("You have defeated the enemies on this level");
-                game.NewLevel(random);
+                _game.NewLevel(_random);
                 UpdateCharacters();
             }
         }
 
         private void SetVisiblityPickeUp(Control weaponControl)
         {
-            weaponControl.Location = game.WeaponInRoom.Location;
-            if (game.WeaponInRoom.PickedUp)
+            weaponControl.Location = _game.WeaponInRoom.Location;
+            if (_game.WeaponInRoom.PickedUp)
                 weaponControl.Visible = false;
             else
                 weaponControl.Visible = true;
@@ -318,10 +317,13 @@ namespace Lab2
 
         private void UpdatePlayer()
         {
-            PlayerPicBox.Location = game.PlayerLocation;
+            PlayerPicBox.Location = _game.PlayerLocation;
             PlayerHitPointsLabel.Text =
-            game.PlayerHitPoints.ToString();
+            _game.PlayerHitPoints.ToString();
         }
+        #endregion
+
+
 
     }
 }

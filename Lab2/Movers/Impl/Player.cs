@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Lab2.GameControls;
-using Lab2.Movers;
 using Lab2.Movers.Weapons;
 
-namespace Lab2
+namespace Lab2.Movers.Impl
 {
-    class Player : Mover
+    public class Player : Mover
     {
-        private Weapon equippedWeapon;
+        private Weapon _equippedWeapon;
+        private List<Weapon> _inventory = new List<Weapon>();
         public int HitPoints { get; private set; }
-        private List<Weapon> inventory = new List<Weapon>();
+        
         public IEnumerable<string> Weapons
         {
             get
             {
                 List<string> names = new List<string>();
-                foreach (Weapon weapon in inventory)
+                foreach (Weapon weapon in _inventory)
                     names.Add(weapon.Name);
                 return names;
             }
         }
-        public Player(Game game, Point location)
-        : base(game, location)
+        public Player(Game game, Point location): base(game, location)
         {
             HitPoints = 10;
         }
@@ -37,33 +36,33 @@ namespace Lab2
         }
         public void Equip(string weaponName)
         {
-            foreach (Weapon weapon in inventory)
+            foreach (Weapon weapon in _inventory)
             {
                 if (weapon.Name == weaponName)
-                    equippedWeapon = weapon;
+                {
+                    _equippedWeapon = weapon;
+                }   
             }
         }
 
         public void Move(Direction direction)
         {
-            base.location = Move(direction, game.Boundaries);
-            if (!game.WeaponInRoom.PickedUp)
+            base._location = Move(direction, _game.Boundaries);
+            if (!_game.WeaponInRoom.PickedUp) { return; }
+            if (_game.WeaponInRoom.Nearby(_game.WeaponInRoom.Location, base._location, 1))
             {
-                if (game.WeaponInRoom.Nearby(game.WeaponInRoom.Location, this.Location, 1))
+                _game.WeaponInRoom.PickUpWeapon();
+                this._inventory.Add(_game.WeaponInRoom);
+                if(_equippedWeapon is null)
                 {
-                    game.WeaponInRoom.PickUpWeapon();
-                    this.inventory.Add(game.WeaponInRoom);
-                    if(equippedWeapon is null)
-                    {
-                        this.Equip(game.WeaponInRoom.Name);
-                    }
+                    this.Equip(_game.WeaponInRoom.Name);
                 }
             }
         }
 
         public void Attack(Direction direction, Random random)
         {
-            equippedWeapon?.Attack(direction, random);
+            _equippedWeapon?.Attack(direction, random);
         }
     }
 }

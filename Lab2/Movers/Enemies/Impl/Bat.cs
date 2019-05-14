@@ -4,7 +4,7 @@ using Lab2.GameControls;
 
 namespace Lab2.Movers.Enemies.Impl
 {
-    class Bat : Enemy
+    public class Bat : Enemy
     {
         private const int HIT_POINTS = 6;
         private const int MAX_DAMAGE = 2;
@@ -19,15 +19,15 @@ namespace Lab2.Movers.Enemies.Impl
                 switch (rand)
                 {
                     case 1:
-                        location = Move(FindPlayerDirection(game.PlayerLocation), game.Boundaries);
+                        _location = Move(FindPlayerDirection(_game.PlayerLocation), _game.Boundaries);
                         break;
                     case 2:
-                        location = Move((Direction)random.Next(3), game.Boundaries);
+                        _location = Move((Direction)random.Next(3), _game.Boundaries);
                         break;
                 }
                 if (NearPlayer())
                 {
-                    game.HitPlayer(MAX_DAMAGE, random);
+                    _game.HitPlayer(MAX_DAMAGE, random);
                 }
             }
         }

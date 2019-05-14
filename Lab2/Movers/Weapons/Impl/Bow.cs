@@ -2,22 +2,16 @@
 using System.Drawing;
 using Lab2.GameControls;
 
-namespace Lab2.Movers.Weapons
+namespace Lab2.Movers.Weapons.Impl
 {
-    class Bow : Weapon
+    public class Bow : Weapon
     {
         private const int RADIUS = 30;
         private const int DAMAGE = 1;
 
         public Bow(Game game, Point location): base(game, location)
         {}
-        public override string Name
-        {
-            get
-            {
-                return "Bow";
-            }
-        }
+        public override string Name => "Bow";
 
         public override void Attack(Direction direction, Random random)
         {

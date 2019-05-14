@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using Lab2.Movers.Weapons;
 using Lab2.GameControls;
 
-
-namespace Lab2
+namespace Lab2.Movers.Weapons.Impl
 {
-    class Sword : Weapon
+    public class Sword : Weapon
     {
         private const int RADIUS = 20;
         private const int DAMAGE = 3;
@@ -14,13 +12,7 @@ namespace Lab2
         public Sword(Game game, Point location): base(game, location)
         {}
 
-        public override string Name
-        {
-            get
-            {
-                return "Sword";
-            }
-        }
+        public override string Name => "Sword";
 
         public override void Attack(Direction direction, Random random)
         {
