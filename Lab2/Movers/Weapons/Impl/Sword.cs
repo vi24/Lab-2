@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
+using Lab2.Movers.Weapons;
+using Lab2.GameControls;
 
 
 namespace Lab2

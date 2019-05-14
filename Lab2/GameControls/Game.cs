@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Windows.Forms;
+using Lab2.Movers.Enemies;
+using Lab2.Movers.Weapons;
+using Lab2.Movers.Potions.Impl;
+using Lab2.Movers.Enemies.Impl;
 
-namespace Lab2
+namespace Lab2.GameControls
 {
     class Game
     {

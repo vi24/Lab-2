@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Lab2.GameControls;
+using Lab2.Movers.Enemies;
+using Lab2.Movers.Enemies.Impl;
 
 namespace Lab2
 {

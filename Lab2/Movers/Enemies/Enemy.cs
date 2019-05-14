@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using Lab2.GameControls;
 
-namespace Lab2
+namespace Lab2.Movers.Enemies
 {
     abstract class Enemy : Mover
     {

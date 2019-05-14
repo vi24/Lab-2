@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
+using Lab2.GameControls;
 
-namespace Lab2
+namespace Lab2.Movers.Enemies.Impl
 {
     class Bat : Enemy
     {
