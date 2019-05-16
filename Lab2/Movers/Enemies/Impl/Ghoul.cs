@@ -3,7 +3,7 @@ using System.Drawing;
 using Lab2.Movers.Enemies;
 using Lab2.GameControls;
 
-namespace Lab2
+namespace Lab2.Movers.Enemies.Impl
 {
     public class Ghoul : Enemy
     {
